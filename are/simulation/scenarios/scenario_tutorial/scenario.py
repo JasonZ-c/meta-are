@@ -24,6 +24,7 @@ from are.simulation.types import Action, EventRegisterer, EventType
 
 @register_scenario("scenario_tutorial")
 class ScenarioTutorial(Scenario):
+    nb_turns = 30
     # Define the start time and duration of the scenario
     start_time: float | None = 0
     duration: float | None = 20  # Scenario duration in seconds
@@ -95,7 +96,9 @@ class ScenarioTutorial(Scenario):
             # Define action2: Simulate receiving a message from Greg
             # Event2 depends on event1 and is scheduled 1 second after event1.
             event2 = aui.send_message_to_agent(
-                content="Hey Assistant, can you take care of transferring the pdf Greg will send me to John? You can send it right away to John Doe.",
+                content="Hey Assistant, can you take care of transferring the pdf Greg will send me to John? "
+                + "the the message will arrive at my email INBOX. You can send it right away to John Doe using forward_email tool. John Doe's email is johndoe@example.com."
+                +"and Argument 'content' must be of type <class 'str'>.",
             ).depends_on(event1, delay_seconds=1)
 
             # Define action3: Simulate receiving a message from Greg
